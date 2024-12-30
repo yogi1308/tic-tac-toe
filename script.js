@@ -1,5 +1,9 @@
-gameboard()
-givePlayerName()
+gameflow()
+function gameflow() {
+    gameboard();
+    givePlayerName();
+    switchTurn();
+}
 function gameboard() {
     board = [];
     for (let i = 0; i < 3; i++) {
@@ -24,4 +28,65 @@ function givePlayerName() {
 
 function createPlayer(name, mark) {
     return {name, mark};
+}
+
+function switchTurn() {
+    while (!checkWinner(player1) || !checkWinner(player2)) {
+        playerTurn(player1)
+        console.log(board)
+        playerTurn(player2)
+        console.log(board)
+    }
+}
+
+function checkWinner(player) {
+    mark = player.mark;
+    if (board[0][0] === mark && board[0][1] === mark && board[0][2] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[1][0] === mark && board[1][1] === mark && board[1][2] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[2][0] === mark && board[2][1] === mark && board[2][2] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[0][0] === mark && board[1][0] === mark && board[2][0] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[0][1] === mark && board[1][1] === mark && board[2][1] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[0][2] === mark && board[1][2] === mark && board[2][2] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[0][0] === mark && board[1][1] === mark && board[2][2] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else if (board[0][2] === mark && board[1][1] === mark && board[2][0] === mark) {
+        console.log(player.name + 'You win');
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function playTurn(player) {
+    let empty = true;
+    while(empty) {
+        prompt('Enter your move' + player.name + '(rows)');
+        prompt('Enter your move(columns)');
+        if (board[row][column] === '') {
+            board[row][column] = player.mark;
+            empty = false;
+        }
+        
+    }
 }
