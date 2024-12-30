@@ -13,7 +13,9 @@ function gameboard() {
         }
         board.push(row);
     }
-    console.log(board);
+    for (let i = 0; i < 3; i++) {
+        console.log(board[i]);
+    }
 }
 
 function givePlayerName() {
@@ -31,11 +33,18 @@ function createPlayer(name, mark) {
 }
 
 function switchTurn() {
-    while (!checkWinner(player1) || !checkWinner(player2)) {
+    while (!checkWinner(player2)) {
         playerTurn(player1)
-        console.log(board)
+        for (let i = 0; i < 3; i++) {
+        console.log(board[i]);
+        }
+        if (checkWinner(player1)) {
+            break;
+        }
         playerTurn(player2)
-        console.log(board)
+        for (let i = 0; i < 3; i++) {
+            console.log(board[i]);
+        }
     }
 }
 
@@ -73,19 +82,26 @@ function checkWinner(player) {
         console.log(player.name + 'You win');
         return true;
     }
+    else if (board[0][0] !== '' && board[0][1] !== '' && board[0][2] !== '' && board[1][0] !== '' && board[1][1] !== '' && board[1][2] !== '' && board[2][0] !== '' && board[2][1] !== '' && board[2][2] !== '') {
+        console.log('It is a tie');
+        return true;
+    }
     else {
         return false;
     }
 }
 
-function playTurn(player) {
+function playerTurn(player) {
     let empty = true;
     while(empty) {
-        prompt('Enter your move' + player.name + '(rows)');
-        prompt('Enter your move(columns)');
+        row = prompt('Enter your move' + player.name + '(rows)');
+        column = prompt('Enter your move(columns)');
         if (board[row][column] === '') {
             board[row][column] = player.mark;
             empty = false;
+        }
+        else {
+            console.log("Invalid move. Try again.");
         }
         
     }
