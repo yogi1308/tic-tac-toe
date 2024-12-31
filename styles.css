@@ -1,7 +1,15 @@
+body {
+    height: 97vh;
+    width: 97.5vw;
+    justify-items: center;
+    align-content: center;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
+    gap: 5px;
 }
 
 .cell {
@@ -10,4 +18,5 @@
     align-items: center;
     border: 1px solid black;
     font-size: 2em;
+    border-radius: 5px;
 }
