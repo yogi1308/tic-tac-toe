@@ -1,20 +1,37 @@
 gameflow()
 function gameflow() {
+    player = 1
     gameboard();
     givePlayerName();
-    switchTurn();
 }
+
+function cellClicked(event) {
+    if (player % 2 === 1) {mark = 'X'} else {mark = 'O'}
+    let cell = event.target;
+    console.log(cell);
+    let cellIndex = cell.classList[1].split('-')[1];
+    let rowIndex = cell.classList[1].split('-')[0];
+    console.log(rowIndex, cellIndex);
+    board[rowIndex][cellIndex] = mark;
+    cell.textContent = mark;
+    player++;
+    checkWinner(mark)
+    console.log(board);
+}
+
 function gameboard() {
+    const container = document.querySelector('.container');
     board = [];
     for (let i = 0; i < 3; i++) {
         row = [];
         for (let j = 0; j < 3; j++) {
             row.push('');
+            const cell = document.createElement('div');
+            cell.classList.add('cell'); cell.classList.add(i + '-' + j);
+            cell.addEventListener('click', cellClicked, {once: true});
+            container.appendChild(cell);
         }
         board.push(row);
-    }
-    for (let i = 0; i < 3; i++) {
-        console.log(board[i]);
     }
 }
 
@@ -32,24 +49,8 @@ function createPlayer(name, mark) {
     return {name, mark};
 }
 
-function switchTurn() {
-    while (!checkWinner(player2)) {
-        playerTurn(player1)
-        for (let i = 0; i < 3; i++) {
-        console.log(board[i]);
-        }
-        if (checkWinner(player1)) {
-            break;
-        }
-        playerTurn(player2)
-        for (let i = 0; i < 3; i++) {
-            console.log(board[i]);
-        }
-    }
-}
-
-function checkWinner(player) {
-    mark = player.mark;
+function checkWinner(playerMark) {
+    mark = playerMark;
     if (board[0][0] === mark && board[0][1] === mark && board[0][2] === mark) {
         console.log(player.name + 'You win');
         return true;
@@ -91,18 +92,36 @@ function checkWinner(player) {
     }
 }
 
-function playerTurn(player) {
-    let empty = true;
-    while(empty) {
-        row = prompt('Enter your move' + player.name + '(rows)');
-        column = prompt('Enter your move(columns)');
-        if (board[row][column] === '') {
-            board[row][column] = player.mark;
-            empty = false;
-        }
-        else {
-            console.log("Invalid move. Try again.");
-        }
+// function switchTurn(event) {
+//     while (!checkWinner(player2)) {
+//         playerTurn(player1, event)
+//         for (let i = 0; i < 3; i++) {
+//         console.log(board[i]);
+//         }
+//         if (checkWinner(player1, event)) {
+//             break;
+//         }
+//         playerTurn(player2)
+//         for (let i = 0; i < 3; i++) {
+//             console.log(board[i]);
+//         }
+//     }
+// }
+
+// function playerTurn(player) {
+//     let empty = true;
+//     while(empty) {
+//         row = 
+//         column = 
+//         if (board[row][column] === '') {
+//             board[row][column] = player.mark;
+//             empty = false;
+//         }
+//         else {
+//             console.log("Invalid move. Try again.");
+//         }
         
-    }
-}
+//     }
+// }
+
+

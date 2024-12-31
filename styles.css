@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    font-size: 2em;
+}
