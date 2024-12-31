@@ -1,5 +1,5 @@
-gameflow()
-function gameflow() {
+
+(function () {
     game = {player: 1, board: [], players: [], 
         initialize() {
             this.gameboard();
@@ -86,4 +86,4 @@ function gameflow() {
     }
     game.initialize();
 
-}
+})()
