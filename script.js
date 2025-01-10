@@ -2,6 +2,7 @@
     game = {player: 1, board: [], players: [], 
         initialize() {
             this.givePlayerName();
+            this.displayScore()
             this.gameboard();
         },
         gameboard() {
@@ -100,6 +101,15 @@
             endScreen = document.querySelector('dialog.end-screen');
             endScreen.close()
             this.gameboard();
+        }, 
+        displayScore() {
+            score = document.querySelector('.score')
+            player1score = document.createElement('div.player1score')
+            player1score.textContent = player1.name + ": 0"
+            player2score = document.createElement('div.player2score')
+            player2score.textContent = player2.name + ': 0'
+            score.appendChild(player1score)
+            score.appendChild(player2score)
         }
     }
     game.initialize();
