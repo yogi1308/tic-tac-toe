@@ -1,7 +1,7 @@
 (function () {
     game = {player: 1, board: [], players: [], 
-        initialize() {
-            this.givePlayerName();
+        async initialize() {
+            await this.givePlayerName();
             this.displayScore()
             this.gameboard();
         },
@@ -21,17 +21,32 @@
             }
         },
         givePlayerName() {
-            let player1Name = prompt('Enter player 1 name');
-            player1Mark = 'X'
-            let player2Name = prompt('Enter player 2 name');
-            player2Mark = 'O'
-            player1 = createPlayer(player1Name, player1Mark);
-            player2 = createPlayer(player2Name, player2Mark);
-            console.log(player1, player2);
+            return new Promise((resolve) => {
+                const playerNameForm = document.querySelector('dialog.playerNameForm');
+                playerNameForm.showModal();
+                const startGameButton = playerNameForm.querySelector('button.startGame');
+                
+                startGameButton.addEventListener('click', () => {
+                    const player1Name = playerNameForm.querySelector('input[name="player1Name"]').value;
+                    const player2Name = playerNameForm.querySelector('input[name="player2Name"]').value;
+                    player1Mark = 'X';
+                    player2Mark = 'O';
+                    
+                    player1 = createPlayer(player1Name, player1Mark);
+                    player2 = createPlayer(player2Name, player2Mark);
+                    
+                    playerNameForm.close();
+                    
+                    const themeButtons = document.querySelectorAll('button.theme');
+                    themeButtons.forEach(button => {button.style.display = 'block'});
+                    
+                    resolve();
+                });
 
-            function createPlayer(name, mark) {
-                return {name, mark};
-            }
+                function createPlayer(name, mark) {
+                    return {name, mark};
+                }
+            });
         },
         cellClicked(event) {
             if (this.player % 2 === 1) {mark = 'X'} else {mark = 'O'}

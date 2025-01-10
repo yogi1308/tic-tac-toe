@@ -8,13 +8,21 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <dialog class="playerNameForm">
+        <form action="">
+            <input type="text" placeholder="Player 1 Name" name="player1Name">
+            <input type="text" placeholder="Player 2 Name" name="player2Name">
+        </form>
+        <button class="startGame">Start Game</button>
+    </dialog>
     <div class="score">
     </div>
     <div class="container"></div>
-    <button>Light</button>
-    <button>Dark</button>
-    <button>Neon</button>
-    <dialog><button>Start Game</button></dialog>
+    <div class="themeButtons">
+        <button class="theme">Light</button>
+        <button class="theme">Dark</button>
+        <button class="theme">Neon</button>
+    </div>
     <dialog>
         <form action="">
             <input type="text" placeholder="Player 1 Name">

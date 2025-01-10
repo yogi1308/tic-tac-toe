@@ -25,4 +25,15 @@ body {
     min-width: 300px;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
+}
+
+.theme {
+    display: none;
+}
+
+.themeButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
