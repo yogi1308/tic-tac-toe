@@ -1,9 +1,8 @@
-
 (function () {
     game = {player: 1, board: [], players: [], 
         initialize() {
-            this.gameboard();
             this.givePlayerName();
+            this.gameboard();
         },
         gameboard() {
             const container = document.querySelector('.container');
@@ -46,6 +45,12 @@
             this.player++;
             if (this.checkWinner(mark)) {
                 console.log(playerName + ' wins!');
+                endScreen = document.querySelector('dialog.end-screen');
+                endScreen.showModal();
+                endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' wins!';
+                resetGame = document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
+                playAgain = document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
+
             }
             console.log(this.board);
         },
@@ -82,6 +87,19 @@
             else {
                 return false;
             }
+        },
+        resetGame() {
+            window.location.reload();
+        },
+        playAgain() {
+            let container = document.querySelector('.container');
+            let cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                container.removeChild(cell);
+            });
+            endScreen = document.querySelector('dialog.end-screen');
+            endScreen.close()
+            this.gameboard();
         }
     }
     game.initialize();

@@ -14,15 +14,20 @@
     <button>Light</button>
     <button>Dark</button>
     <button>Neon</button>
+    <dialog><button>Start Game</button></dialog>
     <dialog>
-        <form action="">Player 1 Name</form>
-        <form action="">Player 2 Name</form>
+        <form action="">
+            <input type="text" placeholder="Player 1 Name">
+            <input type="text" placeholder="Player 2 Name">
+        </form>
         <button>Save</button>
     </dialog>
-    <dialog>
+    <dialog class="end-screen">
         <div></div>
-        <button>Reset Game</button>
-        <button>Reset Board</button>
+        <div>
+            <button class="resetGame">Reset Game</button>
+            <button class="playAgain">Play Again?</button>
+        </div>
     </dialog>
 </body>
 </html>
