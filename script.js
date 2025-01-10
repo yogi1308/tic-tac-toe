@@ -49,6 +49,7 @@
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
                 endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' wins!';
+                this.incrementScore(playerName)
                 resetGame = document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
                 playAgain = document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
 
@@ -103,13 +104,27 @@
             this.gameboard();
         }, 
         displayScore() {
-            score = document.querySelector('.score')
-            player1score = document.createElement('div.player1score')
-            player1score.textContent = player1.name + ": 0"
-            player2score = document.createElement('div.player2score')
-            player2score.textContent = player2.name + ': 0'
-            score.appendChild(player1score)
-            score.appendChild(player2score)
+            const score = document.querySelector('.score');
+            const player1score = document.createElement('div');
+            player1score.classList.add('player1score');
+            player1score.textContent = player1.name + ": 0";
+            const player2score = document.createElement('div');
+            player2score.classList.add('player2score');
+            player2score.textContent = player2.name + ': 0';
+            score.appendChild(player1score);
+            score.appendChild(player2score);
+        },
+        incrementScore(winner) {
+            if (winner == player1.name) {
+                const scoreElement = document.querySelector('body > div.score > div.player1score');
+                const currScore = parseInt(scoreElement.textContent.split(': ')[1]) + 1;
+                scoreElement.textContent = player1.name + ": " + currScore;
+            }
+            else if (winner == player2.name) {
+                const scoreElement = document.querySelector('body > div.score > div.player2score');
+                const currScore = parseInt(scoreElement.textContent.split(': ')[1]) + 1;
+                scoreElement.textContent = player2.name + ": " + currScore;
+            }
         }
     }
     game.initialize();
