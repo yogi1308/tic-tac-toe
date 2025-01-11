@@ -8,6 +8,8 @@
             await this.givePlayerName();
             this.displayScore();
             this.gameboard();
+            const turn = document.querySelector('div.turn');
+            turn.textContent = this.players[0].name + "'s turn";
             document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
             document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
             document.querySelector('button.switchSigns').addEventListener('click', () => this.switchSigns());
@@ -56,6 +58,7 @@
             });
         },
         cellClicked(event) {
+            const turn = document.querySelector('div.turn');
             if (this.player % 2 === 1) {
                 mark = this.players[0].mark;
                 playerName = this.players[0].name;
@@ -63,22 +66,23 @@
                 mark = this.players[1].mark;
                 playerName = this.players[1].name;
             }
+            
             let cell = event.target;
-            console.log(cell);
             let cellIndex = cell.classList[1].split('-')[1];
             let rowIndex = cell.classList[1].split('-')[0];
-            console.log(rowIndex, cellIndex);
             this.board[rowIndex][cellIndex] = mark;
             cell.textContent = mark;
             this.player++;
-            if (this.checkWinner(mark)) {
-                console.log(playerName + ' wins!');
+
+            if (!this.checkWinner(mark)) {
+                turn.textContent = (this.player % 2 === 1 ? this.players[0].name : this.players[1].name) + "'s turn";
+            } else {
+                turn.textContent = playerName + " wins!";
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
                 endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' wins!';
                 this.incrementScore(playerName);
             }
-            console.log(this.board);
         },
         checkWinner(playerMark) {
             mark = playerMark;
@@ -124,9 +128,11 @@
                 container.removeChild(cell);
             });
             endScreen = document.querySelector('dialog.end-screen');
-            endScreen.close()
+            endScreen.close();
             this.gameboard();
             this.player = 1;
+            const turn = document.querySelector('div.turn');
+            turn.textContent = this.players[0].name + "'s turn";
         }, 
         switchSigns() {
             if (player1.mark === 'X') {
@@ -154,6 +160,8 @@
             });
             this.player = 1;
             this.gameboard();
+            const turn = document.querySelector('div.turn');
+            turn.textContent = this.players[0].name + "'s turn";
         },
         displayScore() {
             const score = document.querySelector('.score');
