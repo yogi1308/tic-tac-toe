@@ -149,12 +149,44 @@ dialog::backdrop {
     border: 0px;
 }
 
-/* dialog.dark {
+dialog.dark {
     background-color: #111827;
     color: white;
+} 
+
+dialog.dark::backdrop {
+    background-color: #111827;
 }
 
-dialog.neon {
+.end-screen.dark button {
+    background-color: #374151;
+    color: lightgray;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.end-screen.dark button:hover {
+    background-color: #3b82f6;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.playerNameForm.dark > input, .playerNameForm.dark > button {
+    background-color: #374151;
+    color: lightgray;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.playerNameForm.dark button:hover {
+    background-color: #3b82f6;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* dialog.neon {
     background-color: black;
     color: #4ade80;
     border-color: #ec4899;
@@ -183,5 +215,5 @@ dialog.neon {
     transition: 0.3s;
     cursor: pointer;
     border-radius: 5px;
-
 }
+

@@ -27,6 +27,15 @@
                     cell.classList.add('cell'); 
                     cell.classList.add(i + '-' + j);
                     cell.classList.add('X-hover');
+                    
+                    // Apply current theme to new cells
+                    const body = document.querySelector('body');
+                    if (body.classList.contains('dark')) {
+                        cell.classList.add('dark');
+                    } else if (body.classList.contains('neon')) {
+                        cell.classList.add('neon');
+                    }
+                    
                     cell.addEventListener('click', (event) => this.cellClicked(event), { once: true });
                     container.appendChild(cell);
                 }
@@ -135,7 +144,40 @@
             }
         },
         resetGame() {
-            window.location.reload();
+            // Clear the board
+            let container = document.querySelector('.container');
+            let cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                container.removeChild(cell);
+            });
+
+            // Clear the scores
+            const score = document.querySelector('.score');
+            while (score.firstChild) {
+                score.removeChild(score.firstChild);
+            }
+
+            // Reset game state
+            this.player = 1;
+            this.board = [];
+            this.players = [];
+
+            // Close end screen if open
+            const endScreen = document.querySelector('dialog.end-screen');
+            if (endScreen.open) {
+                endScreen.close();
+            }
+
+            // Clear turn display
+            const turn = document.querySelector('div.turn');
+            turn.textContent = '';
+
+            // Reinitialize the game
+            this.givePlayerName();
+            this.displayScore();
+            this.gameboard();
+            playerTurn = document.querySelector('div.turn');
+            playerTurn.textContent = player1.name + "'s turn";
         },
         playAgain() {
             let container = document.querySelector('.container');
@@ -225,6 +267,8 @@
             cells.forEach(cell => {cell.classList.remove('neon'); cell.classList.remove('dark')})
             buttons = document.querySelectorAll('button.theme')
             buttons.forEach(button => {button.classList.remove('neon'); button.classList.remove('dark'); button.classList.add('dark')})
+            dialog = document.querySelectorAll('dialog')
+            dialog.forEach(dialog => {dialog.classList.remove('neon'); dialog.classList.remove('dark'); dialog.classList.add('dark')})
         },
         neonTheme() {
             body = document.querySelector('body')
@@ -235,6 +279,8 @@
             cells.forEach(cell => {cell.classList.remove('dark'); cell.classList.remove('neon'); cell.classList.add('neon')})
             buttons = document.querySelectorAll('button.theme')
             buttons.forEach(button => {button.classList.remove('dark'); button.classList.remove('neon'); button.classList.add('neon')})
+            dialog = document.querySelectorAll('dialog')
+            dialog.forEach(dialog => {dialog.classList.remove('dark'); dialog.classList.remove('neon'); dialog.classList.add('neon')})
         }
 
     }
