@@ -110,3 +110,50 @@ button.theme.neon {
     opacity: 0.5;
 }
 
+dialog {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 25vw;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+dialog input, dialog button {
+    padding: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+dialog input{
+    margin-bottom: 10px;
+}
+
+dialog::backdrop {
+    background-color: transparent;
+}
+
+.startGame:hover {
+    background-color: #3b82f6;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* dialog.dark {
+    background-color: #111827;
+    color: white;
+}
+
+dialog.neon {
+    background-color: black;
+    color: #4ade80;
+    border-color: #ec4899;
+} */
+
+
