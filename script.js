@@ -20,7 +20,6 @@
             document.querySelectorAll('button.theme').forEach(button => {button.addEventListener('click', () => this.switchTheme(button))});
         },
         gameboard() {
-            console.log(this.players);
             const container = document.querySelector('.container');
             this.board = [];
             for (let i = 0; i < 3; i++) {
@@ -105,7 +104,13 @@
 
             if (!this.checkWinner(mark)) {
                 turn.textContent = (this.player % 2 === 1 ? this.players[0].name : this.players[1].name) + "'s Turn";
-            } else {
+            } 
+            else if (this.checkWinner(mark) === 'tie') {
+                endScreen = document.querySelector('dialog.end-screen');
+                endScreen.showModal();
+                endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = "It's a Tie!";
+            }
+            else {
                 turn.textContent = playerName + " wins!";
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
@@ -140,8 +145,7 @@
                 return true;
             }
             else if (this.board[0][0] !== '' && this.board[0][1] !== '' && this.board[0][2] !== '' && this.board[1][0] !== '' && this.board[1][1] !== '' && this.board[1][2] !== '' && this.board[2][0] !== '' && this.board[2][1] !== '' && this.board[2][2] !== '') {
-                console.log('It is a Tie!');
-                return true;
+                return 'tie';
             }
             else {
                 return false;
@@ -261,6 +265,8 @@
             cells.forEach(cell => {cell.classList.remove('neon'); cell.classList.remove('dark')})
             buttons = document.querySelectorAll('button.theme')
             buttons.forEach(button => {button.classList.remove('neon'); button.classList.remove('dark')})
+            dialog = document.querySelectorAll('dialog')
+            dialog.forEach(dialog => {dialog.classList.remove('dark'); dialog.classList.remove('neon')})
         },
         darkTheme() {
             body = document.querySelector('body')
