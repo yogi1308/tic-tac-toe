@@ -9,7 +9,7 @@
             this.displayScore();
             this.gameboard();
             const turn = document.querySelector('div.turn');
-            turn.textContent = this.players[0].name + "'s turn";
+            turn.textContent = this.players[0].name + "'s Turn";
             document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
             document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
             document.querySelector('button.switchSigns').addEventListener('click', () => this.switchSigns());
@@ -75,13 +75,16 @@
             cell.textContent = mark;
             this.player++;
 
+            if (mark === 'X') {cell.style.color = 'lightcoral';}
+            else {cell.style.color = 'rgb(107, 199, 230)';}
+
             if (!this.checkWinner(mark)) {
-                turn.textContent = (this.player % 2 === 1 ? this.players[0].name : this.players[1].name) + "'s turn";
+                turn.textContent = (this.player % 2 === 1 ? this.players[0].name : this.players[1].name) + "'s Turn";
             } else {
                 turn.textContent = playerName + " wins!";
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
-                endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' wins!';
+                endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' Wins!';
                 this.incrementScore(playerName);
             }
         },
@@ -112,7 +115,7 @@
                 return true;
             }
             else if (this.board[0][0] !== '' && this.board[0][1] !== '' && this.board[0][2] !== '' && this.board[1][0] !== '' && this.board[1][1] !== '' && this.board[1][2] !== '' && this.board[2][0] !== '' && this.board[2][1] !== '' && this.board[2][2] !== '') {
-                console.log('It is a tie');
+                console.log('It is a Tie!');
                 return true;
             }
             else {
