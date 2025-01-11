@@ -198,8 +198,20 @@
         lightTheme() {
         },
         darkTheme() {
+            body = document.querySelector('body')
+            body.classList.remove('neon')
+            body.classList.remove('dark')
+            body.classList.add('dark')
+            buttons = document.querySelectorAll('button.theme')
+            buttons.forEach(button => {button.classList.remove('neon'); button.classList.remove('dark'); button.classList.add('dark')})
         },
         neonTheme() {
+            body = document.querySelector('body')
+            body.classList.remove('neon')
+            body.classList.remove('dark')
+            body.classList.add('neon')
+            buttons = document.querySelectorAll('button.theme')
+            buttons.forEach(button => {button.classList.remove('dark'); button.classList.remove('neon'); button.classList.add('neon')})
         }
 
     }
