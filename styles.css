@@ -46,6 +46,7 @@ body {
 .theme:hover {
     background-color: #3b82f6;
     color: white;
+    transition: 0.5s;
 }
 
 .themeButtons {
@@ -72,4 +73,25 @@ button.theme.dark {
 .theme.dark:hover {
     background-color: #3b82f6;
     color: white;
+    transition: 0.5s;
+}
+
+body.neon {
+    background-color: black;
+    color: #4ade80;
+}
+
+.cell.neon {
+    border: 1px solid #ec4899;
+}
+
+button.theme.neon {
+    background-color: #1f2937;
+    color: #ec4899;
+}
+
+.theme.neon:hover {
+    background-color: #ec4899;
+    color: white;
+    transition: 0.5s;
 }
