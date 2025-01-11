@@ -24,7 +24,9 @@
                 for (let j = 0; j < 3; j++) {
                     row.push('');
                     const cell = document.createElement('div');
-                    cell.classList.add('cell'); cell.classList.add(i + '-' + j);
+                    cell.classList.add('cell'); 
+                    cell.classList.add(i + '-' + j);
+                    cell.classList.add('X-hover');
                     cell.addEventListener('click', (event) => this.cellClicked(event), { once: true });
                     container.appendChild(cell);
                 }
@@ -75,8 +77,18 @@
             cell.textContent = mark;
             this.player++;
 
-            if (mark === 'X') {cell.style.color = 'lightcoral';}
-            else {cell.style.color = 'rgb(107, 199, 230)';}
+            const emptyCells = document.querySelectorAll('.cell:empty');
+            emptyCells.forEach(cell => {
+                cell.classList.remove('X-hover', 'O-hover');
+                const nextMark = this.player % 2 === 1 ? 'X' : 'O';
+                cell.classList.add(`${nextMark}-hover`);
+            });
+
+            if (mark === 'X') {
+                cell.style.color = 'lightcoral';
+            } else {
+                cell.style.color = 'rgb(107, 199, 230)';
+            }
 
             if (!this.checkWinner(mark)) {
                 turn.textContent = (this.player % 2 === 1 ? this.players[0].name : this.players[1].name) + "'s Turn";
@@ -196,6 +208,13 @@
             else if (button.textContent === 'Neon') {this.neonTheme()}
         },
         lightTheme() {
+            body = document.querySelector('body')
+            body.classList.remove('neon')
+            body.classList.remove('dark')
+            cells = document.querySelectorAll('.cell')
+            cells.forEach(cell => {cell.classList.remove('neon'); cell.classList.remove('dark')})
+            buttons = document.querySelectorAll('button.theme')
+            buttons.forEach(button => {button.classList.remove('neon'); button.classList.remove('dark')})
         },
         darkTheme() {
             body = document.querySelector('body')

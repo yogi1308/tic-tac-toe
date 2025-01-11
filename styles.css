@@ -95,3 +95,18 @@ button.theme.neon {
     color: white;
     transition: 0.5s;
 }
+
+.cell.X-hover:hover:empty::before {
+    content: 'X';
+    position: absolute;
+    color: lightcoral;
+    opacity: 0.5;
+}
+
+.cell.O-hover:hover:empty::before {
+    content: 'O';
+    position: absolute;
+    color: rgb(107, 199, 230);
+    opacity: 0.5;
+}
+
