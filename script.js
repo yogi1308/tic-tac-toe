@@ -117,6 +117,7 @@
             endScreen = document.querySelector('dialog.end-screen');
             endScreen.close()
             this.gameboard();
+            this.player = 1;
         }, 
         displayScore() {
             const score = document.querySelector('.score');
