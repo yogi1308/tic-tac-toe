@@ -256,6 +256,10 @@ dialog.neon::backdrop {
     border: 0px;
 }
 
+.playerNameForm.neon > button {
+    color: #ec4899;
+}
+
 .playerNameForm.neon button:hover {
     background-color: #ec4899;
     color: white;

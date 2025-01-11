@@ -5,6 +5,10 @@
 
     game = {player: 1, board: [], players: [], 
         async initialize() {
+            const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (isDarkMode) {
+                this.darkTheme();
+            }
             await this.givePlayerName();
             this.displayScore();
             this.gameboard();
