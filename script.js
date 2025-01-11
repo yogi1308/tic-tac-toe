@@ -1,11 +1,19 @@
 (function () {
+    function createPlayer(name, mark) {
+        return {name, mark};
+    }
+
     game = {player: 1, board: [], players: [], 
         async initialize() {
             await this.givePlayerName();
-            this.displayScore()
+            this.displayScore();
             this.gameboard();
+            document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
+            document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
+            document.querySelector('button.switchSigns').addEventListener('click', () => this.switchSigns());
         },
         gameboard() {
+            console.log(this.players);
             const container = document.querySelector('.container');
             this.board = [];
             for (let i = 0; i < 3; i++) {
@@ -34,6 +42,9 @@
                     
                     player1 = createPlayer(player1Name, player1Mark);
                     player2 = createPlayer(player2Name, player2Mark);
+
+                    this.players.push(player1);
+                    this.players.push(player2);
                     
                     playerNameForm.close();
                     
@@ -42,15 +53,16 @@
                     
                     resolve();
                 });
-
-                function createPlayer(name, mark) {
-                    return {name, mark};
-                }
             });
         },
         cellClicked(event) {
-            if (this.player % 2 === 1) {mark = 'X'} else {mark = 'O'}
-            if (this.player % 2 === 1) {playerName = player1.name} else {playerName = player2.name}
+            if (this.player % 2 === 1) {
+                mark = this.players[0].mark;
+                playerName = this.players[0].name;
+            } else {
+                mark = this.players[1].mark;
+                playerName = this.players[1].name;
+            }
             let cell = event.target;
             console.log(cell);
             let cellIndex = cell.classList[1].split('-')[1];
@@ -64,10 +76,7 @@
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
                 endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' wins!';
-                this.incrementScore(playerName)
-                resetGame = document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
-                playAgain = document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
-
+                this.incrementScore(playerName);
             }
             console.log(this.board);
         },
@@ -119,6 +128,33 @@
             this.gameboard();
             this.player = 1;
         }, 
+        switchSigns() {
+            if (player1.mark === 'X') {
+                player1Mark = 'O' 
+                player2Mark = 'X'
+                player1 = createPlayer(player1.name, player1Mark);
+                player2 = createPlayer(player2.name, player2Mark);
+                this.players[1] = player1;
+                this.players[0] = player2;
+            } 
+            else {
+                player1Mark = 'X' 
+                player2Mark = 'O'
+                player1 = createPlayer(player1.name, player1Mark);
+                player2 = createPlayer(player2.name, player2Mark);
+                this.players[0] = player1;
+                this.players[1] = player2;
+            }
+            endScreen = document.querySelector('dialog.end-screen');
+            endScreen.close()
+            let container = document.querySelector('.container');
+            let cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                container.removeChild(cell);
+            });
+            this.player = 1;
+            this.gameboard();
+        },
         displayScore() {
             const score = document.querySelector('.score');
             const player1score = document.createElement('div');
