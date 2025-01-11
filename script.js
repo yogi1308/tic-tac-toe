@@ -18,6 +18,16 @@
             document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
             document.querySelector('button.switchSigns').addEventListener('click', () => this.switchSigns());
             document.querySelectorAll('button.theme').forEach(button => {button.addEventListener('click', () => this.switchTheme(button))});
+            
+            // Close button handler
+            document.querySelector('button.closeButton').addEventListener('click', () => {
+                document.querySelector('dialog.end-screen').close();
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => {
+                    cell.style.pointerEvents = 'none';  // Disable clicking
+                    cell.classList.remove('X-hover', 'O-hover');  // Remove hover effects
+                });
+            });
         },
         gameboard() {
             const container = document.querySelector('.container');
@@ -106,15 +116,17 @@
                 turn.textContent = (this.player % 2 === 1 ? this.players[0].name : this.players[1].name) + "'s Turn";
             } 
             else if (this.checkWinner(mark) === 'tie') {
+                turn.textContent = "It's a Tie!";
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
                 endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = "It's a Tie!";
+                endScreen.querySelector('button.closeButton').addEventListener('click', () => endScreen.close());
             }
             else {
                 turn.textContent = playerName + " wins!";
                 endScreen = document.querySelector('dialog.end-screen');
                 endScreen.showModal();
-                endScreen.querySelector('dialog.end-screen > div:nth-child(1)').textContent = playerName + ' Wins!';
+                endScreen.querySelector('dialog.end-screen > div:nth-child(2)').textContent = playerName + ' Wins!';
                 this.incrementScore(playerName);
             }
         },
@@ -291,6 +303,10 @@
             buttons.forEach(button => {button.classList.remove('dark'); button.classList.remove('neon'); button.classList.add('neon')})
             dialog = document.querySelectorAll('dialog')
             dialog.forEach(dialog => {dialog.classList.remove('dark'); dialog.classList.remove('neon'); dialog.classList.add('neon')})
+        },
+        closeEndScreen() {
+            const endScreen = document.querySelector('dialog.end-screen');
+            endScreen.close();
         }
 
     }

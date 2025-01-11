@@ -198,10 +198,11 @@ dialog.dark::backdrop {
 .end-screen {
     text-align: center;
     gap: 10px;
-    min-width: 50vw;
+    position: relative;
+    padding-top: 40px;
 }
 
-.end-screen div:nth-child(1) {
+.end-screen div:nth-child(2) {
     margin-bottom: 10px;
     font-size: 1.25em;
     font-weight: 500;
@@ -267,3 +268,54 @@ dialog.neon::backdrop {
     cursor: pointer;
 }
 
+
+
+
+
+
+/* From Uiverse.io by javierBarroso */ 
+.closeButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: rgba(180, 83, 107, 0.11);
+    border-radius: 5px;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeButton:hover {
+    background-color: rgb(211, 21, 21);
+}
+
+.closeButton:active {
+    background-color: rgb(130, 0, 0);
+}
+
+.closeButton .X,
+.closeButton .Y {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+}
+
+.closeButton .X {
+    transform: rotate(45deg);
+}
+
+.closeButton .Y {
+    transform: rotate(-45deg);
+}
+
+/* Remove the tooltip styles */
+.closeButton .close {
+    display: none;
+}
+  
