@@ -133,7 +133,7 @@ dialog input{
 }
 
 dialog::backdrop {
-    background-color: transparent;
+    background-color: white;
 }
 
 .startGame:hover {
@@ -143,6 +143,10 @@ dialog::backdrop {
     border-radius: 5px;
     transition: 0.3s;
     cursor: pointer;
+}
+
+.startGame {
+    border: 0px;
 }
 
 /* dialog.dark {
@@ -157,3 +161,27 @@ dialog.neon {
 } */
 
 
+.end-screen {
+    text-align: center;
+    gap: 10px;
+    min-width: 50vw;
+}
+
+.end-screen div:nth-child(1) {
+    margin-bottom: 10px;
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+.end-screen button {
+    border: 0px;
+}
+
+.end-screen button:hover {
+    background-color: #3b82f6;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
