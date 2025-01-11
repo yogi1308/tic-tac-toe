@@ -13,6 +13,7 @@
             document.querySelector('button.resetGame').addEventListener('click', () => this.resetGame());
             document.querySelector('button.playAgain').addEventListener('click', () => this.playAgain());
             document.querySelector('button.switchSigns').addEventListener('click', () => this.switchSigns());
+            document.querySelectorAll('button.theme').forEach(button => {button.addEventListener('click', () => this.switchTheme(button))});
         },
         gameboard() {
             console.log(this.players);
@@ -185,7 +186,19 @@
                 const currScore = parseInt(scoreElement.textContent.split(': ')[1]) + 1;
                 scoreElement.textContent = player2.name + ": " + currScore;
             }
+        },
+        switchTheme(button) {
+            if (button.textContent === 'Light') {this.lightTheme()}
+            else if (button.textContent === 'Dark') {this.darkTheme()}
+            else if (button.textContent === 'Neon') {this.neonTheme()}
+        },
+        lightTheme() {
+        },
+        darkTheme() {
+        },
+        neonTheme() {
         }
+
     }
     game.initialize();
 
